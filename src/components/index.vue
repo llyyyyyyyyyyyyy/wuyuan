@@ -1,7 +1,5 @@
 <template>
   <div id="maplist">
-    <!-- <header @click="hclick()" ref="he" style="height:20px"></header> -->
-    <img class="logo" src="../assets/img/logo@3x.png" alt="">
     <div id="container"></div>
     <footer>
         <transition leave-active-class="animated  fadeOutDown" enter-active-class="animated fadeInUp">
@@ -48,17 +46,10 @@ export default {
     }},
     beforeMount(){
         this.getData()
-        // this.loadmap()
         let that = this
-        setTimeout(()=>{that.BMap.setZoom(10)},1000)
+        setTimeout(()=>{that.BMap.setZoom(9)},1000)
     },
     methods: {
-        hclick(){
-            console.log(document.body.scrollWidth)
-            console.log(document.getElementById('container').style.height)
-            this.$refs.he.innerHTML =  document.body.clientWidth
-            document.body.clientWidth 
-        },
         toInfo(id){
             this.$router.push({path:'/poiinfo/'+id})
             
@@ -71,7 +62,6 @@ export default {
             observer:true,
             observeParents:true,
             slidesPerView :'auto',
-            // loop:true,
             onSlideChangeEnd() {
                 that.BMap.setZoom(13)
                 that.BMap.setCenter(that.center[that.mySwiper.activeIndex])
@@ -86,16 +76,15 @@ export default {
             this.$http.get('http://dev.shunyi.mydeertrip.com:83/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:546
                 }}).then(res=>{
-                this.initSwiper()
+                // this.initSwiper()
                 this.loadmap(res.data.data.regionDetail[0].ssList)
                 this.swiperData =  res.data.data.regionDetail[0].ssList
                 //绑定点击地图 swiper消失
-                this.BMap.on('click',()=>{if(this.infoWindow.getIsOpen()){
-                    this.swShow = !this.swShow
-                }})
-                this.area = this.BMap.getBounds()
-                this.BMap.setLimitBounds(this.area)
-                console.log(res.data.data.regionDetail[0].ssList)
+                // this.BMap.on('click',()=>{if(this.infoWindow.getIsOpen()){
+                //     this.swShow = !this.swShow
+                // }})
+                // this.area = this.BMap.getBounds()
+                // this.BMap.setLimitBounds(this.area)
             })
         },
         //跳转列表页
@@ -106,12 +95,12 @@ export default {
         loadmap(mapData){
         let that = this
         that.BMap = new AMap.Map('container', {
-            zoom: 10,
-            zooms:[10,19],
-            center: [116.718463,40.132709],
+            zoom: 9,
+            // zooms:[10,19],
+            center: [108.120448,41.079171],
             resizeEnable: true
         });
-        that.BMap.setMapStyle('amap://styles/'+'whitesmoke');
+        // that.BMap.setMapStyle('amap://styles/'+'whitesmoke');
         AMapUI.load(['ui/geo/DistrictExplorer'], function(DistrictExplorer) {
         //创建一个实例
         let districtExplorer  = new DistrictExplorer({
@@ -119,11 +108,11 @@ export default {
         });
       
         initPage(DistrictExplorer);
-        //获取北京数据
-        loadAreaNode(110000, function(error, areaNode) {
-            //移除顺义区的坐标集
-            areaNode._data.geoData.sub.features[9].geometry.coordinates = []
-            areaNode._data.geoData.sub.features[2].geometry.coordinates[1] = []
+        // 获取巴彦淖尔数据
+        loadAreaNode(150800, function(error, areaNode) {
+            //移除五原的坐标集
+            console.log(areaNode._data.geoData.sub)
+            areaNode._data.geoData.sub.features[1].geometry.coordinates = []
             renderAreaPolygons(areaNode)
         });
         //绘制某个区域的边界
@@ -141,7 +130,7 @@ export default {
                 };
             });
         }
-        //加载区域
+        // 加载区域
         function loadAreaNode(adcode, callback) {
             districtExplorer.loadAreaNode(adcode, function(error, areaNode) {
                 if (callback) {
@@ -166,42 +155,42 @@ export default {
         }
 
     //点击出来的信息窗体 
-        that.infoWindow = new AMap.InfoWindow({
-            offset: new AMap.Pixel(-6, 6),
-            closeWhenClickMap:true,
-            isCustom:true
-        });
-        for (let i = 0 ; i < mapData.length; i++) {
-            that.center.push([mapData[i].longitude,mapData[i].latitude])
-            let marker = new AMap.Marker({
-                position: [mapData[i].longitude,mapData[i].latitude],
-                map: that.BMap,
-                offset: new AMap.Pixel(-5,-5),
-                icon:new AMap.Icon({            
-                    image:mapData[i].icon=='human'? require('../assets/img/Oval 7@3x.png') : require('../assets/img/Oval 3@3x.png'),
-                    imageSize: new AMap.Size(10,10),
-                }) 
-            });
-            marker.content = `<div class="mMarker" style="background:${mapData[i].icon=='human'?'#EAC454':'#56B7F0' }">
-                                    <div class="picBox">
-                                        <img src=${mapData[i].icon=='human'?require('../assets/img/人文@3x.png'):require('../assets/img/自然@3x.png')}>
-                                    </div>
-                                    <i>${mapData[i].name}</i>
-                                </div>`;
-            marker.on('click', function (e) {
-                that.mySwiper.slideTo(i)
-                that.swShow = true
-                that.infoWindow.setContent(e.target.content);
-                that.BMap.setCenter([mapData[i].longitude,mapData[i].latitude])
-                that.BMap.setZoom(13)
-                if(!that.infoWindow.getIsOpen()){
-                    that.infoWindow.open(that.BMap, e.target.getPosition());
-                    setTimeout(()=>{that.mySwiper.slideTo(i)},100) 
-                }
-            });
-        }
+        // that.infoWindow = new AMap.InfoWindow({
+        //     offset: new AMap.Pixel(-6, 6),
+        //     closeWhenClickMap:true,
+        //     isCustom:true
+        // });
+        // for (let i = 0 ; i < mapData.length; i++) {
+        //     that.center.push([mapData[i].longitude,mapData[i].latitude])
+        //     let marker = new AMap.Marker({
+        //         position: [mapData[i].longitude,mapData[i].latitude],
+        //         map: that.BMap,
+        //         offset: new AMap.Pixel(-5,-5),
+        //         icon:new AMap.Icon({            
+        //             image:mapData[i].icon=='human'? require('../assets/img/Oval 7@3x.png') : require('../assets/img/Oval 3@3x.png'),
+        //             imageSize: new AMap.Size(10,10),
+        //         }) 
+        //     });
+        //     marker.content = `<div class="mMarker" style="background:${mapData[i].icon=='human'?'#EAC454':'#56B7F0' }">
+        //                             <div class="picBox">
+        //                                 <img src=${mapData[i].icon=='human'?require('../assets/img/人文@3x.png'):require('../assets/img/自然@3x.png')}>
+        //                             </div>
+        //                             <i>${mapData[i].name}</i>
+        //                         </div>`;
+        //     marker.on('click', function (e) {
+        //         that.mySwiper.slideTo(i)
+        //         that.swShow = true
+        //         that.infoWindow.setContent(e.target.content);
+        //         that.BMap.setCenter([mapData[i].longitude,mapData[i].latitude])
+        //         that.BMap.setZoom(13)
+        //         if(!that.infoWindow.getIsOpen()){
+        //             that.infoWindow.open(that.BMap, e.target.getPosition());
+        //             setTimeout(()=>{that.mySwiper.slideTo(i)},100) 
+        //         }
+        //     });
+        // }
     
-        that.BMap.setFitView();
+        // that.BMap.setFitView();
         function initPage(DistrictExplorer) {
             //创建一个实例
             let districtExplorer = new DistrictExplorer({
@@ -210,7 +199,7 @@ export default {
                   
             districtExplorer.loadMultiAreaNodes(
                 //只需加载全国和市，全国的节点包含省级
-                [100000].concat(110000),
+                [100000].concat(150800),
                 function(error, areaNodes) {              
                     let countryNode = areaNodes[0],
                         cityNodes = areaNodes.slice(1);
