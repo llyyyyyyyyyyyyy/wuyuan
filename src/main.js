@@ -26,7 +26,7 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
-window.host = 'http://shunyi.sinacolour.com/wxcallback';
+window.host = 'dev.discover.mydeertrip.com';
 window.debug = true;
 window.tool = {}
 window.tool.token = function() {
