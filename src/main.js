@@ -26,7 +26,7 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 window.host = 'h.5y.mydeertrip.com/wxcallback';
-window.debug = false;
+window.debug = true;
 window.tool = {}
 window.tool.token = function() {
 	let token = localStorage.getItem('wytoken')

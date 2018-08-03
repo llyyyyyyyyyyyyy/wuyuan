@@ -66,7 +66,7 @@
                     <a :href='"tel:"+InfoData.guidePhone'><i>{{InfoData.guidePhone}}</i></a>
                 </h4> -->
             </div>
-            <div class="title">
+            <!-- <div class="title">
                 <div class="k"></div>
                 <h3>景点评论</h3>
                 <router-link :to="{ name: 'comment', params:{ name: `${InfoData.name}`, id:InfoData.id } }">
@@ -97,7 +97,7 @@
                     <img src="../assets/img/PathCopy 4@3x.png" alt="">
                 </h6>
             </router-link>
-            <p class="more" @click="commentNum += 5" v-if="commentNum < comment.length">查看更多精彩评论   ></p>
+            <p class="more" @click="commentNum += 5" v-if="commentNum < comment.length">查看更多精彩评论   ></p> -->
             <div class="title">
                 <div class="k"></div>
                 <h3>附近景点</h3>
