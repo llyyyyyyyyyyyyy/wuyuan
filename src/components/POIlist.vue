@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         getData(){
-            this.$http.get('http://a.5y.mydeertrip.com/wuyuan/plan/sslist',{
+            this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:546
                 }}).then(res=>{
                 console.log(res.data.data.regionDetail[0].ssList)

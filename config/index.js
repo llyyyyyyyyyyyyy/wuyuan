@@ -3,7 +3,12 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+var t = new Date();
+var m = t.getMonth()+1;
+if (m < 10) {
+    m = '0' + m
+}
+var times = t.getFullYear()+''+m+''+t.getDate()+''+t.getHours()+''+t.getMinutes();
 module.exports = {
   dev: {
 
@@ -38,10 +43,10 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../wuyuan/index.html'),
+    index: path.resolve(__dirname, '../'+times+'wuyuan/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../wuyuan'),
+    assetsRoot: path.resolve(__dirname, '../'+times+'wuyuan'),
     assetsSubDirectory: 'wuyuan',
     assetsPublicPath: './',
 
