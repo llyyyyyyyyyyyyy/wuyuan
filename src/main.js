@@ -30,7 +30,7 @@ window.host = 'dev.discover.mydeertrip.com';
 window.debug = true;
 window.tool = {}
 window.tool.token = function() {
-	let token = localStorage.getItem('sytoken')
+	let token = localStorage.getItem('wytoken')
 	if (!token || token === 'undefined') {
 		if (debug) {
 			return 'e288cdc4355f3704f8efaef76347b3df'
