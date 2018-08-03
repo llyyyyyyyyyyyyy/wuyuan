@@ -7,7 +7,7 @@
                 <i v-for="(i,a) in n.natureList" :key="i.id" v-if="a<3"><span v-if="a > 0"> · </span>{{i.value}}</i>
             </h3>
             <div class="impression">
-                <p style="-webkit-box-orient: vertical"><span>活动亮点：</span>{{n.description150}}</p>
+                <p style="-webkit-box-orient: vertical"><span>简介：</span>{{n.description150}}</p>
             </div>
         </div>
     </div>
