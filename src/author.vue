@@ -8,7 +8,7 @@ export default {
   data () {
     return {
       code: '',
-      appid: 'wx3bcca88734756af0'
+      appid: 'wx8120c0ad075f5613'
     }
   },
   created () {
