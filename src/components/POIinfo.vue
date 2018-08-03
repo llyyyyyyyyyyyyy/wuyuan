@@ -261,7 +261,7 @@ export default {
                     this.loadmap(res.data.data.ss)
                     this.InfoData = res.data.data.ss
                     this.initSwiper()
-                    this.getComment()
+                    // this.getComment()
                     this.getNear()
                     setTimeout(()=>{
                         if(this.$refs.MP.innerHTML.length < 100){
@@ -271,12 +271,12 @@ export default {
                 Indicator.close()
         },
         //获取评论
-        getComment(){
-            this.$http.get('http://obs.5y.mydeertrip.com/comment/list?itemId='+this.$route.params.id+'&isCream=2&qType=all&start=0&limit=1000&token='+tool.token()).then(res=>{
-                    this.comment = res.data.data.list;
+        // getComment(){
+        //     this.$http.get('http://obs.5y.mydeertrip.com/comment/list?itemId='+this.$route.params.id+'&isCream=2&qType=all&start=0&limit=1000&token='+tool.token()).then(res=>{
+        //             this.comment = res.data.data.list;
                    
-            })
-        },
+        //     })
+        // },
         //获取附近景点
         getNear(){
             this.$http.get('http://a.5y.mydeertrip.com/scenic_spots/listNearbyss',{
