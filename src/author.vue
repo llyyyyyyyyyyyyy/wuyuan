@@ -29,7 +29,7 @@ export default {
   },
   methods: {
       login () {
-        let url = 'http://a.5y.mydeertrip.com/wx/wechat/login?code=' + this.code + '&state=wuyuan';
+        let url = 'http://a.5y.mydeertrip.com/wuyuan/wx/wechat/login?code=' + this.code + '&state=wuyuan';
         let _this = this;
         // 获取用户信息
         this.$http.get(url)

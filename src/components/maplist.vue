@@ -82,7 +82,7 @@ export default {
         },
         //获取数据
         getData(){
-            this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
+            this.$http.get('http://a.5y.mydeertrip.com/wuyuan/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:546
                 }}).then(res=>{
                 this.loadmap(res.data.data.regionDetail[0].ssList)
