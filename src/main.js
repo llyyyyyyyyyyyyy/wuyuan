@@ -27,7 +27,7 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 window.host = 'dev.discover.mydeertrip.com';
-window.debug = false;
+window.debug = true;
 window.tool = {}
 window.tool.token = function() {
 	let token = localStorage.getItem('wytoken')

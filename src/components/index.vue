@@ -67,13 +67,13 @@ export default {
                 that.BMap.setCenter(that.center[that.mySwiper.activeIndex])
                 that.infoWindow.open(that.BMap,that.center[that.mySwiper.activeIndex])
                 that.infoWindow.setContent(that.BMap.getAllOverlays('marker')[that.mySwiper.activeIndex].content)
-                }
-            })
+                } 
+            }) 
         
         },
         //获取数据
         getData(){
-            this.$http.get('http://a.5y.mydeertrip.com/wuyuan/plan/sslist',{
+            this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:546
                 }}).then(res=>{
                 // this.initSwiper()
