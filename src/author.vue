@@ -24,12 +24,12 @@ export default {
     }else{
       var redirect_uri = encodeURI(window.host);
 
-      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.appid + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=shunyi&connect_redirect=1#wechat_redirect';
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.appid + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=snsapi_userinfo&state=wuyuan&connect_redirect=1#wechat_redirect';
     }
   },
   methods: {
       login () {
-        let url = 'http://shunyi.sinacolour.com/shunyi/wx/wechat/login?code=' + this.code + '&state=shunyi';
+        let url = 'http://a.5y.mydeertrip.com/wx/wechat/login?code=' + this.code + '&state=wuyuan';
         let _this = this;
         // 获取用户信息
         this.$http.get(url)
@@ -39,7 +39,7 @@ export default {
               // document.querySelector('#author').innerHTML = JSON.stringify(data);
 
               var result = data.data;
-              localStorage.setItem('sytoken', result.token);
+              localStorage.setItem('wytoken', result.token);
               localStorage.setItem('userId', result.user.userId);
               localStorage.setItem('nickName', result.user.nickName);
               localStorage.setItem('personSign', result.user.personSign);
