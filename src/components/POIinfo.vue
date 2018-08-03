@@ -10,15 +10,15 @@
         <main>
             <div class="title">
                 <div class="k"></div>
-                <h3>活动介绍</h3>
+                <h3>简介</h3>
             </div>
-            <div class="pSty"  >
+            <!-- <div class="pSty"  >
                 <p><span>活动亮点：</span>{{InfoData.description150}}</p>
+            </div> -->
+            <div class="pSty intrp" >
+                <p  :class="this.more ? 'moreP' : ''" style="-webkit-box-orient: vertical" ref="MP">{{InfoData.guideIntro}}</p>
             </div>
-            <div class="pSty intrp">
-                <p  :class="this.more ? 'moreP' : ''" style="-webkit-box-orient: vertical"><span>活动详情：</span>{{InfoData.guideIntro}}</p>
-            </div>
-            <div class="unfold" ref="unfold" @click="moreIntry" ><i v-if="this.more">查看更多</i><i v-if="!this.more">收起详情</i></div>
+            <div class="unfold" ref="unfold" @click="moreIntry" v-if="this.moreShow"><i v-if="this.more">查看更多</i><i v-if="!this.more">收起详情</i></div>
             <div class="title">
                 <div class="k"></div>
                 <h3>实用信息</h3>
@@ -50,7 +50,7 @@
                     <span>交通</span>
                     <i>{{InfoData.guideTraffic}}</i>
                 </h4>
-                <h4 v-if="InfoData.guideTips">
+                <!-- <h4 v-if="InfoData.guideTips">
                     <img src="../assets/img/灯泡@3x.png" alt="" style="height:0.15rem;width:0.13rem">
                     <span>贴士</span>
                     <i>{{InfoData.guideTips}}</i>
@@ -64,7 +64,7 @@
                     <img src="../assets/img/电话@3x.png" alt="" style="height:0.14rem;width:0.14rem"> 
                     <span>电话</span>
                     <a :href='"tel:"+InfoData.guidePhone'><i>{{InfoData.guidePhone}}</i></a>
-                </h4>
+                </h4> -->
             </div>
             <div class="title">
                 <div class="k"></div>
@@ -116,6 +116,9 @@
     </div>
 </template>
 <script>
+window.onload=function(){
+//   console.log(document.getElementsByClassName("intrp")[0].offsetHeight)
+}
 import { Indicator } from 'mint-ui'
 import bigPic from './bigPic'
 import AMap from 'AMap'
@@ -131,7 +134,8 @@ export default {
             nearData:[],
             imgSrc:[],
             showImg:false,
-            more:true
+            more:true,
+            moreShow:true,
         }
     },
     computed: {
@@ -249,7 +253,7 @@ export default {
         //获取页面信息
         getInfo(){
             var _this = this;
-            this.$http.get('http://dev.shunyi.mydeertrip.com:83/scenic_spots/guide',{
+            this.$http.get('http://a.5y.mydeertrip.com/scenic_spots/guide',{
                 params:{id:this.id,token:tool.token()}
             }).then(res=>{
                     var arr = res.data.data.ss.imgList || []
@@ -259,20 +263,23 @@ export default {
                     this.initSwiper()
                     this.getComment()
                     this.getNear()
-                    console.log(res.data.data.ss)
+                    setTimeout(()=>{
+                        if(this.$refs.MP.innerHTML.length < 100){
+                            this.moreShow = false
+                        }},500) 
                 })
-                // Indicator.close()
+                Indicator.close()
         },
         //获取评论
         getComment(){
-            this.$http.get('http://dev.shunyi.mydeertrip.com:84/comment/list?itemId='+this.$route.params.id+'&isCream=2&qType=all&start=0&limit=1000&token='+tool.token()).then(res=>{
+            this.$http.get('http://obs.5y.mydeertrip.com/comment/list?itemId='+this.$route.params.id+'&isCream=2&qType=all&start=0&limit=1000&token='+tool.token()).then(res=>{
                     this.comment = res.data.data.list;
                    
             })
         },
         //获取附近景点
         getNear(){
-            this.$http.get('http://dev.shunyi.mydeertrip.com:83/scenic_spots/listNearbyss',{
+            this.$http.get('http://a.5y.mydeertrip.com/scenic_spots/listNearbyss',{
                 params:{lat:this.InfoData.latitude,lon:this.InfoData.longitude,ssId:this.id}
             }).then(res=>{
                 this.nearData = res.data.data.list
@@ -382,10 +389,10 @@ main .intrp{
     position: relative;
     overflow: hidden;
     .moreP{
-        height: 0.46rem;
+        height: auto;
         display: -webkit-box;
         // -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 5;
         overflow: hidden;
     }
 }

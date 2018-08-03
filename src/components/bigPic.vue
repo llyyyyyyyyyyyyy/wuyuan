@@ -31,7 +31,7 @@ export default {
 
 .fade-enter,
 .fade-leave-active {
-    /* transform: translate3D(100%, 0, 0); */
+    transform: translate3D(100%, 0, 0);
 }
 
 

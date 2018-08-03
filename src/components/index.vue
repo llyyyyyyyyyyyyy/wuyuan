@@ -73,7 +73,7 @@ export default {
         },
         //获取数据
         getData(){
-            this.$http.get('http://mgmt.sinacolour.com:87/plan/sslist',{
+            this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:546
                 }}).then(res=>{
                 // this.initSwiper()
@@ -100,7 +100,7 @@ export default {
             center: [108.120448,41.079171],
             resizeEnable: true
         });
-        // that.BMap.setMapStyle('amap://styles/'+'whitesmoke');
+        that.BMap.setMapStyle('amap://styles/'+'whitesmoke');
         AMapUI.load(['ui/geo/DistrictExplorer'], function(DistrictExplorer) {
         //创建一个实例
         let districtExplorer  = new DistrictExplorer({
