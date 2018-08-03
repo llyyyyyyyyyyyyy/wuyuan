@@ -73,18 +73,18 @@ export default {
         },
         //获取数据
         getData(){
-            this.$http.get('http://dev.shunyi.mydeertrip.com:83/plan/sslist',{
+            this.$http.get('http://mgmt.sinacolour.com:87/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:546
                 }}).then(res=>{
                 // this.initSwiper()
                 this.loadmap(res.data.data.regionDetail[0].ssList)
                 this.swiperData =  res.data.data.regionDetail[0].ssList
-                //绑定点击地图 swiper消失
-                // this.BMap.on('click',()=>{if(this.infoWindow.getIsOpen()){
-                //     this.swShow = !this.swShow
-                // }})
-                // this.area = this.BMap.getBounds()
-                // this.BMap.setLimitBounds(this.area)
+               // 绑定点击地图 swiper消失
+                this.BMap.on('click',()=>{if(this.infoWindow.getIsOpen()){
+                    this.swShow = !this.swShow
+                }})
+                this.area = this.BMap.getBounds()
+                this.BMap.setLimitBounds(this.area)
             })
         },
         //跳转列表页
@@ -155,40 +155,40 @@ export default {
         }
 
     //点击出来的信息窗体 
-        // that.infoWindow = new AMap.InfoWindow({
-        //     offset: new AMap.Pixel(-6, 6),
-        //     closeWhenClickMap:true,
-        //     isCustom:true
-        // });
-        // for (let i = 0 ; i < mapData.length; i++) {
-        //     that.center.push([mapData[i].longitude,mapData[i].latitude])
-        //     let marker = new AMap.Marker({
-        //         position: [mapData[i].longitude,mapData[i].latitude],
-        //         map: that.BMap,
-        //         offset: new AMap.Pixel(-5,-5),
-        //         icon:new AMap.Icon({            
-        //             image:mapData[i].icon=='human'? require('../assets/img/Oval 7@3x.png') : require('../assets/img/Oval 3@3x.png'),
-        //             imageSize: new AMap.Size(10,10),
-        //         }) 
-        //     });
-        //     marker.content = `<div class="mMarker" style="background:${mapData[i].icon=='human'?'#EAC454':'#56B7F0' }">
-        //                             <div class="picBox">
-        //                                 <img src=${mapData[i].icon=='human'?require('../assets/img/人文@3x.png'):require('../assets/img/自然@3x.png')}>
-        //                             </div>
-        //                             <i>${mapData[i].name}</i>
-        //                         </div>`;
-        //     marker.on('click', function (e) {
-        //         that.mySwiper.slideTo(i)
-        //         that.swShow = true
-        //         that.infoWindow.setContent(e.target.content);
-        //         that.BMap.setCenter([mapData[i].longitude,mapData[i].latitude])
-        //         that.BMap.setZoom(13)
-        //         if(!that.infoWindow.getIsOpen()){
-        //             that.infoWindow.open(that.BMap, e.target.getPosition());
-        //             setTimeout(()=>{that.mySwiper.slideTo(i)},100) 
-        //         }
-        //     });
-        // }
+        that.infoWindow = new AMap.InfoWindow({
+            offset: new AMap.Pixel(-6, 6),
+            closeWhenClickMap:true,
+            isCustom:true
+        });
+        for (let i = 0 ; i < mapData.length; i++) {
+            that.center.push([mapData[i].longitude,mapData[i].latitude])
+            let marker = new AMap.Marker({
+                position: [mapData[i].longitude,mapData[i].latitude],
+                map: that.BMap,
+                offset: new AMap.Pixel(-5,-5),
+                icon:new AMap.Icon({            
+                    image:mapData[i].icon=='human'? require('../assets/img/Oval 7@3x.png') : require('../assets/img/Oval 3@3x.png'),
+                    imageSize: new AMap.Size(10,10),
+                }) 
+            });
+            marker.content = `<div class="mMarker" style="background:${mapData[i].icon=='human'?'#EAC454':'#56B7F0' }">
+                                    <div class="picBox">
+                                        <img src=${mapData[i].icon=='human'?require('../assets/img/人文@3x.png'):require('../assets/img/自然@3x.png')}>
+                                    </div>
+                                    <i>${mapData[i].name}</i>
+                                </div>`;
+            marker.on('click', function (e) {
+                that.mySwiper.slideTo(i)
+                that.swShow = true
+                that.infoWindow.setContent(e.target.content);
+                that.BMap.setCenter([mapData[i].longitude,mapData[i].latitude])
+                that.BMap.setZoom(13)
+                if(!that.infoWindow.getIsOpen()){
+                    that.infoWindow.open(that.BMap, e.target.getPosition());
+                    setTimeout(()=>{that.mySwiper.slideTo(i)},100) 
+                }
+            });
+        }
     
         // that.BMap.setFitView();
         function initPage(DistrictExplorer) {
