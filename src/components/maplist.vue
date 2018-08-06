@@ -1,7 +1,5 @@
 <template>
   <div id="maplist">
-      <!-- <header @click="hclick()"></header> -->
-    <img class="logo" src="../assets/img/logo@3x.png" alt="">
     <div id="container" class="mymap"></div>
     <div class="but" @click='init(InfoData)'>
         <img src="../assets/img/Shape2@3x.png" alt="">导航
@@ -82,8 +80,9 @@ export default {
         },
         //获取数据
         getData(){
+
             this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
-                params:{cursor:1,limit:100,regionIds:546
+                params:{cursor:1,limit:100,regionIds:549
                 }}).then(res=>{
                 this.loadmap(res.data.data.regionDetail[0].ssList)
                 this.area = this.BMap.getBounds()
@@ -97,7 +96,7 @@ export default {
             that.BMap = new AMap.Map('container', {
                 zoom: 10,
                 zooms:[10,19],
-                center: [116.718463,40.132709],
+                center: [108.120448,41.079171],
                 resizeEnable: true
             });
             that.BMap.setMapStyle('amap://styles/'+'whitesmoke');

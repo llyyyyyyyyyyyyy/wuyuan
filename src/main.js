@@ -13,7 +13,6 @@ import 'mint-ui/lib/style.css'
 import vuex from 'vuex'
 import store from './store/store.js'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-
 Vue.use(Mint)
 Vue.use(vuex)
 Vue.use(VueAwesomeSwiper)
@@ -26,7 +25,7 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
-window.host = 'dev.discover.mydeertrip.com';
+window.host = 'h.5y.mydeertrip.com/wxcallback';
 window.debug = true;
 window.tool = {}
 window.tool.token = function() {

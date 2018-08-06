@@ -66,7 +66,7 @@
                     <a :href='"tel:"+InfoData.guidePhone'><i>{{InfoData.guidePhone}}</i></a>
                 </h4> -->
             </div>
-            <div class="title">
+            <!-- <div class="title">
                 <div class="k"></div>
                 <h3>景点评论</h3>
                 <router-link :to="{ name: 'comment', params:{ name: `${InfoData.name}`, id:InfoData.id } }">
@@ -97,7 +97,7 @@
                     <img src="../assets/img/PathCopy 4@3x.png" alt="">
                 </h6>
             </router-link>
-            <p class="more" @click="commentNum += 5" v-if="commentNum < comment.length">查看更多精彩评论   ></p>
+            <p class="more" @click="commentNum += 5" v-if="commentNum < comment.length">查看更多精彩评论   ></p> -->
             <div class="title">
                 <div class="k"></div>
                 <h3>附近景点</h3>
@@ -234,7 +234,7 @@ export default {
             let map = new AMap.Map('container', {
             dragEnable:  false ,
             zoomEnable:false,
-            zoom: 13,
+            zoom: 12,
             center: [mapData.longitude,mapData.latitude]
             });
             let icon = new AMap.Icon({
@@ -271,14 +271,15 @@ export default {
                 Indicator.close()
         },
         //获取评论
-        // getComment(){
-        //     this.$http.get('http://obs.5y.mydeertrip.com/comment/list?itemId='+this.$route.params.id+'&isCream=2&qType=all&start=0&limit=1000&token='+tool.token()).then(res=>{
-        //             this.comment = res.data.data.list;
+       // getComment(){
+         //   this.$http.get('http://obs.5y.mydeertrip.com/wuyuan/comment/list?itemId='+this.$route.params.id+'&isCream=2&qType=all&start=0&limit=1000&token='+tool.token()).then(res=>{
+          //          this.comment = res.data.data.list;
                    
-        //     })
-        // },
+          //  })
+       // },
         //获取附近景点
         getNear(){
+
             this.$http.get('http://a.5y.mydeertrip.com/scenic_spots/listNearbyss',{
                 params:{lat:this.InfoData.latitude,lon:this.InfoData.longitude,ssId:this.id}
             }).then(res=>{

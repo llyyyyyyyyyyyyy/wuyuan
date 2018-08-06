@@ -1,5 +1,6 @@
 <template>
-  <div id="maplist">
+  <div id="maplist" >
+    <div class=" shade" v-show="mapShow"></div>
     <div id="container"></div>
     <footer>
         <transition leave-active-class="animated  fadeOutDown" enter-active-class="animated fadeInUp">
@@ -25,8 +26,7 @@
                 </div>
             </div>
             </transition>
-        </div>
-         
+        </div> 
     </footer>
   </div>
   
@@ -41,13 +41,15 @@ export default {
             BMap:[],
             center:[],
             InfoWindow:[],
-            swShow:false,
-            area:[]
+            swShow:true,
+            area:[],
+            mapShow:true,
     }},
     beforeMount(){
         this.getData()
         let that = this
-        setTimeout(()=>{that.BMap.setZoom(9)},1000)
+        
+        setTimeout(()=>{that.BMap.setZoomAndCenter(9, [108.120448,40.851646]);this.mapShow=false},1500)
     },
     methods: {
         toInfo(id){
@@ -74,9 +76,9 @@ export default {
         //获取数据
         getData(){
             this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
-                params:{cursor:1,limit:100,regionIds:546
+                params:{cursor:1,limit:100,regionIds:549
                 }}).then(res=>{
-                // this.initSwiper()
+                this.initSwiper()
                 this.loadmap(res.data.data.regionDetail[0].ssList)
                 this.swiperData =  res.data.data.regionDetail[0].ssList
                // 绑定点击地图 swiper消失
@@ -96,8 +98,8 @@ export default {
         let that = this
         that.BMap = new AMap.Map('container', {
             zoom: 9,
-            // zooms:[10,19],
-            center: [108.120448,41.079171],
+            zooms:[9,19],
+            center: [108.120448,40.851646],
             resizeEnable: true
         });
         that.BMap.setMapStyle('amap://styles/'+'whitesmoke');
@@ -188,6 +190,7 @@ export default {
                     setTimeout(()=>{that.mySwiper.slideTo(i)},100) 
                 }
             });
+            marker.emit('click', {target: marker})
         }
     
         // that.BMap.setFitView();
@@ -230,14 +233,7 @@ export default {
 
 
 <style lang="scss" scoped>
-.logo{
-    position: fixed;
-    top: 0.12rem;
-    left: 0.12rem;
-    height: 1.15rem;
-    width: 1.15rem;
-    z-index: 200;
-}
+
  .swiperBox{
         width: 3.75rem;
         z-index: 300;
@@ -276,6 +272,15 @@ export default {
     width: 100%;
     z-index: 10;
     position: relative;
+    .shade{
+    height: 6.67rem;
+    width: 100%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 9999;
+    background: #fff;
+}
 }
 footer{
     position: fixed;

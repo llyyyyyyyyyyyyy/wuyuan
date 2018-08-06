@@ -2,7 +2,7 @@
 	<div id="photo" :style="winHeight">
 		<swiper :options="swiperOption" ref="mySwiper" v-if="this.imgArr.length>0">
 		    <swiper-slide style="" v-for="(img,i) in imgArr" :key="i">
-		    	<img :src="img.img" style="width:100%;" alt="">
+		    	<img :src="img.img+'-NewdeerFPs.ios'" style="width:100%;" alt="">
 		    	<div class="swiper-lazy-preloader" slot="preloader"></div>
 		    </swiper-slide>
 	    	<div class="swiper-pagination"  slot="pagination"></div>

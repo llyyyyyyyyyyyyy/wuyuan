@@ -7,7 +7,7 @@
                 <i v-for="(i,a) in n.natureList" :key="i.id" v-if="a<3"><span v-if="a > 0"> · </span>{{i.value}}</i>
             </h3>
             <div class="impression">
-                <p style="-webkit-box-orient: vertical"><span>简介：</span>{{n.description150}}</p>
+                <p style="-webkit-box-orient: vertical"><span>简介：</span>{{n.guideIntro}}</p>
             </div>
         </div>
     </div>
@@ -21,8 +21,8 @@ export default {
     },
     methods:{
         getData(){
-            this.$http.get('http://a.5y.mydeertrip.com/wuyuan/plan/sslist',{
-                params:{cursor:1,limit:100,regionIds:546
+            this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
+                params:{cursor:1,limit:100,regionIds:549
                 }}).then(res=>{
                 console.log(res.data.data.regionDetail[0].ssList)
                 this.POIinfo = res.data.data.regionDetail[0].ssList 
