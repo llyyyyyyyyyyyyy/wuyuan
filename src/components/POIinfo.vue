@@ -116,9 +116,6 @@
     </div>
 </template>
 <script>
-window.onload=function(){
-//   console.log(document.getElementsByClassName("intrp")[0].offsetHeight)
-}
 import { Indicator } from 'mint-ui'
 import bigPic from './bigPic'
 import AMap from 'AMap'
@@ -154,14 +151,14 @@ export default {
         picClick(Psrc){
             this.showImg = true
             this.imgSrc = Psrc;
-            console.log(this.imgSrc)
+            // console.log(this.imgSrc)
 
         },
         mapClick(){
              this.$router.push({path:'/maplist/'+this.id})
          },
         nearClick(nearid){
-            console.log(nearid)
+            // console.log(nearid)
             this.$router.push({path:'/poiinfo/'+nearid})
         },
         init (obj){

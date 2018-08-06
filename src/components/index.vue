@@ -45,11 +45,12 @@ export default {
             area:[],
             mapShow:true,
     }},
-    beforeMount(){
-        this.getData()
+    created(){
+        this.getData()      
+    },
+    mounted(){
         let that = this
-        
-        setTimeout(()=>{that.BMap.setZoomAndCenter(9, [108.120448,40.851646]);this.mapShow=false},1500)
+        setTimeout(()=>{that.BMap.setZoomAndCenter(9, [108.120448,40.851646]);that.mapShow=false},2000)
     },
     methods: {
         toInfo(id){
@@ -78,9 +79,10 @@ export default {
             this.$http.get('http://a.5y.mydeertrip.com/plan/sslist',{
                 params:{cursor:1,limit:100,regionIds:549
                 }}).then(res=>{
+                this.swiperData =  res.data.data.regionDetail[0].ssList
                 this.initSwiper()
                 this.loadmap(res.data.data.regionDetail[0].ssList)
-                this.swiperData =  res.data.data.regionDetail[0].ssList
+                
                // 绑定点击地图 swiper消失
                 this.BMap.on('click',()=>{if(this.infoWindow.getIsOpen()){
                     this.swShow = !this.swShow

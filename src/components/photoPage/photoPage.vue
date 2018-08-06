@@ -22,12 +22,12 @@
 			back(){
 				window.history.back();
 			},
-		    // 假数据
+
 		    initImgsArr(n, m) { //num 图片数量
 		      	var arr = []
 		      	if (this.photo) {
 		      		for (var i = 0; i < this.photo.length; i++) {
-			        	arr.push({ src: this.photo[i].img })
+			        	arr.push({ src: this.photo[i].img +'-NewdeerFPs.ios'})
 			      	}
 		      	}
 		      	console.log(arr)

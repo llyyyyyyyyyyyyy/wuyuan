@@ -9,7 +9,6 @@
     box-sizing: border-box;
     float: left; // 首行排版
     transition: left 1s, top 1s;
-    padding-bottom: 24px;
     .img-inner-box {
       // box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
       .img-wraper {
@@ -91,10 +90,10 @@
   a.img-box(
     v-for="(v,i) in imgsArrC",
     @click="imgClick(v.src,i)"
-    :style="{'padding-top':gap/2+'px','padding-left':gap/2+'px', width: isMobile ? '' : colWidth+'px'} "
+    :style="{'padding-top':gap/4+'px','padding-left':gap/2+'px','padding-bottom':gap/4+'px' ,width: isMobile ? '' : colWidth+'px'} "
   )
     .img-inner-box
-      div.img-wraper(:style="{width:imgWidthC+'px',height:v.height?v.height+'px':'', backgroundImage: 'url(' + v.src+'-NewdeerFPs.ios'+ ')'}")
+      div.img-wraper(:style="{width:imgWidthC+'px',height:v.height?v.height+'px':'', backgroundImage: 'url(' + v.src+ ')'}")
         // img(:src="v.src")
         slot(:index="i",:value="v")
 
